@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prolog плодове с различни правила и GIF</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      max-width: 700px;
+      margin: 30px auto;
+      background: #f9f9f9;
+      color: #333;
+      padding: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      text-align: center;
+    }
+    textarea {
+      width: 90%;
+      max-width: 600px;
+      height: 120px;
+      font-family: monospace;
+      font-size: 16px;
+      margin-top: 10px;
+      border-radius: 6px;
+      border: 2px solid #007acc;
+      padding: 8px;
+      resize: vertical;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 25px;
+      font-size: 18px;
+      background-color: #007acc;
+      border: none;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #005f99;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 18px;
+      min-height: 30px;
+      font-weight: bold;
+      color: #004a99;
+    }
+   
+    }
+    .fruit-img {
+      max-width: 180px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #b87a00;
+    }
+  </style>
+</head>
+<body>
+  <h1>Приложение за плодове</h1>
+    }
+    .fruit-img {
+      max-width: 180px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #b87a00;
+    }
+  </style>
+</head>
+<body>
+  <h1>Приложение за плодове</h1>
+
+  <textarea id="prolog-input" rows="8" cols="50">
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8" />
+  <title>Приложение за плодове</title>
+  <style>
+    .fruit-container {
+      margin-top: 30px;
+      min-height: 160px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #fff0d6;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #f5d06b;
+    }
+    .fruit-img {
+      max-width: 180px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #b87a00;
+    }
+  </style>
+</head>
+<body>
+  <h1>Приложение за плодове</h1>
+
+  <textarea id="prolog-input" rows="8" cols="50">
+% Плодове
+fruit(pomegranate).
+fruit(pineapple).
+fruit(mango).
+fruit(raspberry).
+fruit(blueberry).
+fruit(blackberry).
+
+% Характеристики
+sweet(pomegranate).
+sweet(mango).
+sweet(raspberry).
+sweet(blueberry).
+sweet(blackberry).
+
+big(pomegranate).
+big(pineapple).
+big(mango).
+
+berry(raspberry).
+berry(blueberry).
+berry(blackberry).
+
+% Правила
+is_fruit(X) :- fruit(X).
+is_sweet(X) :- sweet(X).
+is_big(X) :- big(X).
+is_berry(X) :- berry(X).
+  </textarea><br />
+  <button onclick="runProlog()">Изпълни</button>
+
+  <div id="result"></div>
+
+  <script src="https://unpkg.com/tau-prolog"></script>
+  <script>
+    const session = pl.create();
+
+    const knowledge = `
+      fruit(pomegranate).
+      fruit(pineapple).
+      fruit(mango).
+      fruit(raspberry).
+      fruit(blueberry).
+      fruit(blackberry).
+
+      sweet(pomegranate).
+      sweet(mango).
+      sweet(raspberry).
+      sweet(blueberry).
+      sweet(blackberry).
+
+      big(pomegranate).
+      big(pineapple).
+      big(mango).
+
+      berry(raspberry).
+      berry(blueberry).
+      berry(blackberry).
+
+      is_fruit(X) :- fruit(X).
+      is_sweet(X) :- sweet(X).
+      is_big(X) :- big(X).
+      is_berry(X) :- berry(X).
+    `;
+
+    session.consult(knowledge);
+
+    function runProlog() {
+      const query = document.getElementById('prolog-input').value.trim();
+      if (!query) return;
+
+      session.query(query);
+
+      let answers = [];
+      function callback(answer) {
+        if (answer === false) {
+          if (answers.length === 0) {
+            document.getElementById('result').innerText = "Няма резултати.";
+          } else {
+            document.getElementById('result').innerText = answers.join(', ');
+          }
+        } else {
+          const answerStr = session.format_answer(answer);
+          answers.push(answerStr);
+          session.answer(callback);
+        }
+      }
+
+      session.answer(callback);
+    }
+  </script>
+</body>
+</html>
+
+    const fruitAnimations = {
+    pomegrante: 'https://www.google.com/search?sca_esv=41514daaec8f90aa&q=pomegranate&udm=2&fbs=AIIjpHzFQFU2IN3_vb31Zl3DVXGf2x4CuKBrIl0KzZf87m2sh2qgD_aVKpFQIApfZ72nwO4prAfNiweraGZ298B91aPt9Plytd0wUxK7HDnZZ_ajM_JxEOM1y6iW8WSxflANiHF5zmivBEYiEI89gWJQSgfofidukqfAxbM8akgANLTjxViyKRMY1VyMQabZ2qQbQe6DA2BgsLu83TdSDWpb3smhfep3oOHsOeKk8zbNgPKwraNzp-ysYaODCq3Y2piJbOGWUdDo&sa=X&ved=2ahUKEwiGnJme1teNAxW4QvEDHfHDHWAQtKgLegQIFRAB&biw=1366&bih=641&dpr=1#vhid=Zx8HS5_nvftDSM&vssid=mosaic>',
+      pineaplle: 'https://www.google.com/search?q=pineapple&sca_esv=41514daaec8f90aa&udm=2&biw=1366&bih=641&ei=cS9AaIbcIburxc8P48XjgQg&oq=pine&gs_lp=EgNpbWciBHBpbmUqAggAMgoQABiABBhDGIoFMgUQABiABDIFEAAYgAQyChAAGIAEGEMYigUyBRAAGIAEMgUQABiABDIFEAAYgAQyChAAGIAEGEMYigUyBRAAGIAEMgUQABiABEjJUVDgBlidQXAEeACQAQKYAWGgAd4LqgECMTm4AQHIAQD4AQGYAgygAsQFqAIAwgIGEAAYBxgewgILEAAYgAQYsQMYgwHCAggQABiABBixA8ICDRAAGIAEGLEDGEMYigXCAgcQABiABBgKwgIHEAAYgAQYE5gDSIgGAZIHAjEyoAfWWLIHATi4B5sFwgcGMi0xMC4yyAdc&sclient=img>',
+      mango: 'https://www.google.com/search?q=mango&sca_esv=41514daaec8f90aa&udm=2&biw=1366&bih=641&ei=6S9AaPSlL6yXxc8PtqqH4Q8&ved=0ahUKEwi0vuPY1teNAxWsS_EDHTbVIfwQ4dUDCBE&uact=5&oq=mango&gs_lp=EgNpbWciBW1hbmdvMhAQABiABBixAxhDGIMBGIoFMgsQABiABBixAxiDATIKEAAYgAQYQxiKBTIKEAAYgAQYQxiKBTIKEAAYgAQYQxiKBTIKEAAYgAQYQxiKBTIKEAAYgAQYQxiKBTILEAAYgAQYsQMYgwEyBRAAGIAEMgoQABiABBhDGIoFSNAoUKgHWO0icAJ4AJABApgBVqAB7geqAQIxM7gBA8gBAPgBAZgCB6ACmgSoAgDCAgYQABgHGB7CAggQABiABBixA5gDAogGAZIHATegB_g9sgcBNrgHjQTCBwUyLTYuMcgHMg&sclient=img>',
+      raspberry: 'https://www.google.com/search?q=raspberry&sca_esv=41514daaec8f90aa&udm=2&biw=1366&bih=641&ei=EDBAaNCwG_mGxc8Ph-SBmAs&oq=ras&gs_lp=EgNpbWciA3JhcyoCCAAyChAAGIAEGEMYigUyChAAGIAEGEMYigUyCxAAGIAEGLEDGIMBMgUQABiABDIFEAAYgAQyBRAAGIAEMgUQABiABDIFEAAYgAQyDhAAGIAEGLEDGIMBGIoFMgUQABiABEjyI1C6A1jOE3ACeACQAQKYAVWgAaIEqgEBN7gBAcgBAPgBAZgCBaAC5AKoAgDCAhAQABiABBixAxhDGIMBGIoFwgIGEAAYBxgewgIIEAAYgAQYsQOYAwGIBgGSBwE1oAeBIbIHATS4B9kCwgcFMi00LjHIByM&sclient=img',
+      blueberry: 'https://www.google.com/search?q=blueberry&sca_esv=41514daaec8f90aa&udm=2&biw=1366&bih=641&ei=NjBAaKqFBZWIxc8Pq_GegAo&oq=blue&gs_lp=EgNpbWciBGJsdWUqAggAMgoQABiABBhDGIoFMgoQABiABBhDGIoFMgoQABiABBhDGIoFMgoQABiABBhDGIoFMggQABiABBixAzIIEAAYgAQYsQMyCBAAGIAEGLEDMggQABiABBixAzIIEAAYgAQYsQMyBRAAGIAESPMbUIQIWPoScAF4AJABAJgBX6AB0AKqAQE0uAEByAEA-AEBmAIEoALwAqgCAMICEBAAGIAEGLEDGEMYgwEYigXCAgsQABiABBixAxiDAZgDA5IHAzMuMaAHmBOyBwMzLjG4B_ACwgcFMi0zLjHIBx0&sclient=img',
+      blackberry: 'https://www.google.com/search?q=blackberry&sca_esv=41514daaec8f90aa&udm=2&biw=1366&bih=641&ei=aTBAaNK3K62P7NYP0d26oAY&ved=0ahUKEwiSkOSV19eNAxWtB9sEHdGuDmQQ4dUDCBE&uact=5&oq=blackberry&gs_lp=EgNpbWciCmJsYWNrYmVycnkyChAAGIAEGEMYigUyEBAAGIAEGLEDGEMYgwEYigUyBRAAGIAEMgUQABiABDIFEAAYgAQyBRAAGIAEMgUQABiABDIFEAAYgAQyBRAAGIAEMgUQABiABEiiTlC-CVjnRnABeACQAQCYAVagAdYIqgECMTW4AQPIAQD4AQGYAhCgAtQJwgIGEAAYBxgewgIIEAAYgAQYsQPCAgsQABiABBixAxiDAZgDAIgGAZIHAjE2oAfKSLIHAjE1uAfICcIHBjItMTUuMcgHcQ&sclient=img'
+    };
+
+    function runProlog() {
+      const input = document.getElementById("prolog-input").value;
+      const resultDiv = document.getElementById("result");
+      const animDiv = document.getElementById("animal-animation");
+
+      resultDiv.innerHTML = "";
+      animDiv.innerHTML = "";
+
+      session.query(input);
+      session.answers(answer => {
+        if(answer === false) {
+          resultDiv.innerHTML += `<p>Няма повече резултати.</p>`;
+          return;
+        }
+        const str = pl.format_answer(answer);
+        if (str === "false.") {
+          resultDiv.innerHTML = "<p>Няма резултати за тази заявка.</p>";
+          return;
+        }
+        resultDiv.innerHTML += `<p>${str}</p>`;
+
+        const match = str.match(/X = (\w+)/);
+        if (match) {
+          const animal = match[1];
+          if (animalAnimations[animal]) {
+            animDiv.innerHTML = animalAnimations[animal];
+          } else {
+            animDiv.innerHTML = "<p>Няма GIF за това животно.</p>";
+          }
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>
