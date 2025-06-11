@@ -69,7 +69,6 @@
 <body>
   <h1>Задание: Програма с Prolog за плодове и GIF визуализация</h1>
 
- 
   <h1>Prolog плодове с различни правила и GIF</h1>
 
   <textarea id="prolog-input">
@@ -87,7 +86,7 @@ is_forest_fruit(X).
   <script>
     const session = pl.create();
 
-    // Разширена база знания с животни и правила
+    // Разширена база знания с плодове и правила
     const knowledge = `
      % Плодове
 fruit(mango).
@@ -112,23 +111,22 @@ forest(blackberry).
 is_fruit(X) :- fruit(X).
 is_sweet(X) :- sweet(X).
 is_forest_fruit(X) :- forest(X).
-
     `;
 
     session.consult(knowledge);
 
-    const animalAnimations = {
-      mango: https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNTM0cXQ5d2F6ampub2ZwMDRkaHZua3VybDN0aGdrZWJmaTc0ZDg3ayZlcD12MV9naWZzX3NlYXJjaCZjdD1n/dHuKqGHoq4Cef54Ggf/giphy.gif
-      tiger: '<img src="https://media.giphy.com/media/fANhQpcPGr2hO/giphy.gif" class="animal-gif" alt="Тигър анимация" />',
-      crocodile: '<img src="https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif" class="animal-gif" alt="Крокодил анимация" />',
-      kangaroo: '<img src="https://media.giphy.com/media/l0MYEw7nYdf6r62aI/giphy.gif" class="animal-gif" alt="Кенгуру анимация" />',
-      owl: '<img src="https://media.giphy.com/media/3ohs4B9Zz54HXGvoYs/giphy.gif" class="animal-gif" alt="Бухал анимация" />'
+    const fruitAnimations = {
+      mango: '<img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNTM0cXQ5d2F6ampub2ZwMDRkaHZua3VybDN0aGdrZWJmaTc0ZDg3ayZlcD12MV9naWZzX3NlYXJjaCZjdD1n/dHuKqGHoq4Cef54Ggf/giphy.gif" class="fruit-gif" alt="Манго анимация" />',
+      pineapple: '<img src="https://media.giphy.com/media/YUjGeMl20JjoA/giphy.gif" class="fruit-gif" alt="Ананас анимация" />',
+      raspberry: '<img src="https://media.giphy.com/media/JqA6OAXsf9ZBq/giphy.gif" class="fruit-gif" alt="Малина анимация" />',
+      blueberry: '<img src="https://media.giphy.com/media/Xv2NSZHX6ykrs/giphy.gif" class="fruit-gif" alt="Боровинка анимация" />',
+      blackberry: '<img src="https://media.giphy.com/media/3o6ZtcUFEoFuDhKfgE/giphy.gif" class="fruit-gif" alt="Капина анимация" />'
     };
 
     function runProlog() {
       const input = document.getElementById("prolog-input").value;
       const resultDiv = document.getElementById("result");
-      const animDiv = document.getElementById("animal-animation");
+      const animDiv = document.getElementById("fruit-animation");
 
       resultDiv.innerHTML = "";
       animDiv.innerHTML = "";
@@ -148,11 +146,11 @@ is_forest_fruit(X) :- forest(X).
 
         const match = str.match(/X = (\w+)/);
         if (match) {
-          const animal = match[1];
-          if (animalAnimations[animal]) {
-            animDiv.innerHTML = animalAnimations[animal];
+          const fruit = match[1];
+          if (fruitAnimations[fruit]) {
+            animDiv.innerHTML = fruitAnimations[fruit];
           } else {
-            animDiv.innerHTML = "<p>Няма GIF за това животно.</p>";
+            animDiv.innerHTML = "<p>Няма GIF за този плод.</p>";
           }
         }
       });
