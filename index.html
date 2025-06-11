@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Prolog плодове с различни правила и GIF</title>
+  <title>Prolog животни с различни правила и GIF</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -49,157 +49,80 @@
       font-weight: bold;
       color: #004a99;
     }
-   
-    }
-    .fruit-img {
-      max-width: 180px;
-      border-radius: 12px;
-      box-shadow: 0 0 10px #b87a00;
-    }
-  </style>
-</head>
-<body>
-  <h1>Приложение за плодове</h1>
-    }
-    .fruit-img {
-      max-width: 180px;
-      border-radius: 12px;
-      box-shadow: 0 0 10px #b87a00;
-    }
-  </style>
-</head>
-<body>
-  <h1>Приложение за плодове</h1>
-
-  <textarea id="prolog-input" rows="8" cols="50">
-<!DOCTYPE html>
-<html lang="bg">
-<head>
-  <meta charset="UTF-8" />
-  <title>Приложение за плодове</title>
-  <style>
-    .fruit-container {
+    .animal-container {
       margin-top: 30px;
       min-height: 160px;
       display: flex;
       justify-content: center;
       align-items: center;
-      background: #fff0d6;
+      background: #d0e8ff;
       border-radius: 12px;
-      box-shadow: 0 0 10px #f5d06b;
+      box-shadow: 0 0 10px #a0c4ff;
     }
-    .fruit-img {
+    .fruit-gif {
       max-width: 180px;
       border-radius: 12px;
-      box-shadow: 0 0 10px #b87a00;
+      box-shadow: 0 0 10px #005f99;
     }
   </style>
 </head>
 <body>
-  <h1>Приложение за плодове</h1>
+  <h1>Задание: Програма с Prolog за плодове и GIF визуализация</h1>
 
-  <textarea id="prolog-input" rows="8" cols="50">
-% Плодове
-fruit(pomegranate).
-fruit(pineapple).
-fruit(mango).
-fruit(raspberry).
-fruit(blueberry).
-fruit(blackberry).
+ 
+  <h1>Prolog плодове с различни правила и GIF</h1>
 
-% Характеристики
-sweet(pomegranate).
-sweet(mango).
-sweet(raspberry).
-sweet(blueberry).
-sweet(blackberry).
-
-big(pomegranate).
-big(pineapple).
-big(mango).
-
-berry(raspberry).
-berry(blueberry).
-berry(blackberry).
-
-% Правила
-is_fruit(X) :- fruit(X).
-is_sweet(X) :- sweet(X).
-is_big(X) :- big(X).
-is_berry(X) :- berry(X).
+  <textarea id="prolog-input">
+% Примери на заявки:
+is_fruit(X).
+is_sweet(X).
+is_sour(X).
   </textarea><br />
   <button onclick="runProlog()">Изпълни</button>
 
   <div id="result"></div>
+  <div class="fruit-container" id="fruit-animation"></div>
 
   <script src="https://unpkg.com/tau-prolog"></script>
   <script>
     const session = pl.create();
 
+    // Разширена база знания с животни и правила
     const knowledge = `
-      fruit(pomegranate).
-      fruit(pineapple).
-      fruit(mango).
-      fruit(raspberry).
-      fruit(blueberry).
-      fruit(blackberry).
+     % Плодове
+fruit(mango).
+fruit(pineapple).
+fruit(raspberry).
+fruit(blueberry).
+fruit(blackberry).
 
-      sweet(pomegranate).
-      sweet(mango).
-      sweet(raspberry).
-      sweet(blueberry).
-      sweet(blackberry).
+% Сладки плодове
+sweet(mango).
+sweet(pineapple).
+sweet(raspberry).
+sweet(blueberry).
+sweet(blackberry).
 
-      big(pomegranate).
-      big(pineapple).
-      big(mango).
+% Горски плодове
+forest(raspberry).
+forest(blueberry).
+forest(blackberry).
 
-      berry(raspberry).
-      berry(blueberry).
-      berry(blackberry).
+% Правила
+is_fruit(X) :- fruit(X).
+is_sweet(X) :- sweet(X).
+is_forest_fruit(X) :- forest(X).
 
-      is_fruit(X) :- fruit(X).
-      is_sweet(X) :- sweet(X).
-      is_big(X) :- big(X).
-      is_berry(X) :- berry(X).
     `;
 
     session.consult(knowledge);
 
-    function runProlog() {
-      const query = document.getElementById('prolog-input').value.trim();
-      if (!query) return;
-
-      session.query(query);
-
-      let answers = [];
-      function callback(answer) {
-        if (answer === false) {
-          if (answers.length === 0) {
-            document.getElementById('result').innerText = "Няма резултати.";
-          } else {
-            document.getElementById('result').innerText = answers.join(', ');
-          }
-        } else {
-          const answerStr = session.format_answer(answer);
-          answers.push(answerStr);
-          session.answer(callback);
-        }
-      }
-
-      session.answer(callback);
-    }
-  </script>
-</body>
-</html>
-
-    const fruitAnimations = {
-    pomegrante: 'https://www.google.com/search?sca_esv=41514daaec8f90aa&q=pomegranate&udm=2&fbs=AIIjpHzFQFU2IN3_vb31Zl3DVXGf2x4CuKBrIl0KzZf87m2sh2qgD_aVKpFQIApfZ72nwO4prAfNiweraGZ298B91aPt9Plytd0wUxK7HDnZZ_ajM_JxEOM1y6iW8WSxflANiHF5zmivBEYiEI89gWJQSgfofidukqfAxbM8akgANLTjxViyKRMY1VyMQabZ2qQbQe6DA2BgsLu83TdSDWpb3smhfep3oOHsOeKk8zbNgPKwraNzp-ysYaODCq3Y2piJbOGWUdDo&sa=X&ved=2ahUKEwiGnJme1teNAxW4QvEDHfHDHWAQtKgLegQIFRAB&biw=1366&bih=641&dpr=1#vhid=Zx8HS5_nvftDSM&vssid=mosaic>',
-      pineaplle: 'https://www.google.com/search?q=pineapple&sca_esv=41514daaec8f90aa&udm=2&biw=1366&bih=641&ei=cS9AaIbcIburxc8P48XjgQg&oq=pine&gs_lp=EgNpbWciBHBpbmUqAggAMgoQABiABBhDGIoFMgUQABiABDIFEAAYgAQyChAAGIAEGEMYigUyBRAAGIAEMgUQABiABDIFEAAYgAQyChAAGIAEGEMYigUyBRAAGIAEMgUQABiABEjJUVDgBlidQXAEeACQAQKYAWGgAd4LqgECMTm4AQHIAQD4AQGYAgygAsQFqAIAwgIGEAAYBxgewgILEAAYgAQYsQMYgwHCAggQABiABBixA8ICDRAAGIAEGLEDGEMYigXCAgcQABiABBgKwgIHEAAYgAQYE5gDSIgGAZIHAjEyoAfWWLIHATi4B5sFwgcGMi0xMC4yyAdc&sclient=img>',
-      mango: 'https://www.google.com/search?q=mango&sca_esv=41514daaec8f90aa&udm=2&biw=1366&bih=641&ei=6S9AaPSlL6yXxc8PtqqH4Q8&ved=0ahUKEwi0vuPY1teNAxWsS_EDHTbVIfwQ4dUDCBE&uact=5&oq=mango&gs_lp=EgNpbWciBW1hbmdvMhAQABiABBixAxhDGIMBGIoFMgsQABiABBixAxiDATIKEAAYgAQYQxiKBTIKEAAYgAQYQxiKBTIKEAAYgAQYQxiKBTIKEAAYgAQYQxiKBTIKEAAYgAQYQxiKBTILEAAYgAQYsQMYgwEyBRAAGIAEMgoQABiABBhDGIoFSNAoUKgHWO0icAJ4AJABApgBVqAB7geqAQIxM7gBA8gBAPgBAZgCB6ACmgSoAgDCAgYQABgHGB7CAggQABiABBixA5gDAogGAZIHATegB_g9sgcBNrgHjQTCBwUyLTYuMcgHMg&sclient=img>',
-      raspberry: 'https://www.google.com/search?q=raspberry&sca_esv=41514daaec8f90aa&udm=2&biw=1366&bih=641&ei=EDBAaNCwG_mGxc8Ph-SBmAs&oq=ras&gs_lp=EgNpbWciA3JhcyoCCAAyChAAGIAEGEMYigUyChAAGIAEGEMYigUyCxAAGIAEGLEDGIMBMgUQABiABDIFEAAYgAQyBRAAGIAEMgUQABiABDIFEAAYgAQyDhAAGIAEGLEDGIMBGIoFMgUQABiABEjyI1C6A1jOE3ACeACQAQKYAVWgAaIEqgEBN7gBAcgBAPgBAZgCBaAC5AKoAgDCAhAQABiABBixAxhDGIMBGIoFwgIGEAAYBxgewgIIEAAYgAQYsQOYAwGIBgGSBwE1oAeBIbIHATS4B9kCwgcFMi00LjHIByM&sclient=img',
-      blueberry: 'https://www.google.com/search?q=blueberry&sca_esv=41514daaec8f90aa&udm=2&biw=1366&bih=641&ei=NjBAaKqFBZWIxc8Pq_GegAo&oq=blue&gs_lp=EgNpbWciBGJsdWUqAggAMgoQABiABBhDGIoFMgoQABiABBhDGIoFMgoQABiABBhDGIoFMgoQABiABBhDGIoFMggQABiABBixAzIIEAAYgAQYsQMyCBAAGIAEGLEDMggQABiABBixAzIIEAAYgAQYsQMyBRAAGIAESPMbUIQIWPoScAF4AJABAJgBX6AB0AKqAQE0uAEByAEA-AEBmAIEoALwAqgCAMICEBAAGIAEGLEDGEMYgwEYigXCAgsQABiABBixAxiDAZgDA5IHAzMuMaAHmBOyBwMzLjG4B_ACwgcFMi0zLjHIBx0&sclient=img',
-      blackberry: 'https://www.google.com/search?q=blackberry&sca_esv=41514daaec8f90aa&udm=2&biw=1366&bih=641&ei=aTBAaNK3K62P7NYP0d26oAY&ved=0ahUKEwiSkOSV19eNAxWtB9sEHdGuDmQQ4dUDCBE&uact=5&oq=blackberry&gs_lp=EgNpbWciCmJsYWNrYmVycnkyChAAGIAEGEMYigUyEBAAGIAEGLEDGEMYgwEYigUyBRAAGIAEMgUQABiABDIFEAAYgAQyBRAAGIAEMgUQABiABDIFEAAYgAQyBRAAGIAEMgUQABiABEiiTlC-CVjnRnABeACQAQCYAVagAdYIqgECMTW4AQPIAQD4AQGYAhCgAtQJwgIGEAAYBxgewgIIEAAYgAQYsQPCAgsQABiABBixAxiDAZgDAIgGAZIHAjE2oAfKSLIHAjE1uAfICcIHBjItMTUuMcgHcQ&sclient=img'
+    const animalAnimations = {
+      mango: https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNTM0cXQ5d2F6ampub2ZwMDRkaHZua3VybDN0aGdrZWJmaTc0ZDg3ayZlcD12MV9naWZzX3NlYXJjaCZjdD1n/dHuKqGHoq4Cef54Ggf/giphy.gif
+      tiger: '<img src="https://media.giphy.com/media/fANhQpcPGr2hO/giphy.gif" class="animal-gif" alt="Тигър анимация" />',
+      crocodile: '<img src="https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif" class="animal-gif" alt="Крокодил анимация" />',
+      kangaroo: '<img src="https://media.giphy.com/media/l0MYEw7nYdf6r62aI/giphy.gif" class="animal-gif" alt="Кенгуру анимация" />',
+      owl: '<img src="https://media.giphy.com/media/3ohs4B9Zz54HXGvoYs/giphy.gif" class="animal-gif" alt="Бухал анимация" />'
     };
 
     function runProlog() {
